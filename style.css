@@ -1,0 +1,452 @@
+:root {
+    --bgcolor: black;
+    --primary: white;
+    --a-width: 300px;
+    --a-height: 40px;
+    --font-family: "Poppins", sans-serif;
+    --a-prim: #04aa6d;
+    --a-sec: #a1bd43;
+  }
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
+  html,
+  body {
+    background-color: var(--bgcolor);
+    color: var(--primary);
+    width: 100%;
+    height: 100%;
+    transition: 0.5s background-color;
+  }
+  .container {
+    position: relative;
+    width: 80%;
+    max-width: 500px;
+    margin: auto;
+    height: 100%;
+    text-align: center;
+    overflow: hidden;
+    /* border: 1px solid purple; */
+  }
+  
+  #head-word {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    z-index: 20;
+    font-family: cursive;
+  }
+  .links {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: 1s all;
+  }
+  .links a {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 19px;
+    padding: 5px 10px;
+    width: var(--a-width);
+    margin-top: 2em;
+    height: var(--a-height);
+    display: grid;
+    place-content: center;
+    font-weight: 800;
+    background-image: linear-gradient(to right, var(--a-prim), var(--a-sec));
+    overflow: hidden;
+    transition: 1s all;
+  }
+  .links a span {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-right: 10px solid rgba(255, 255, 255, 0.5);
+    transform: translate(-100px) rotate(-40deg);
+    transition: 1s all;
+  }
+  .links a:hover span {
+    transform: translate(300px) rotate(-40deg);
+  }
+  .toggle-rect {
+    position: absolute;
+    right: 0%;
+    top: 7.5%;
+    width: 40px;
+    height: 25px;
+    background-color: #f3f3f3;
+    border-radius: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    transition: 0.5s all;
+    box-sizing: content-box;
+    z-index: 20;
+  }
+  .toggle-circle {
+    width: 50%;
+    height: 75%;
+    border-radius: 50%;
+    background-color: grey;
+    transition: 0.5s all;
+    transform: translateX(0%);
+  }
+  .board {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 60%;
+    /*word-break: break-all;*/
+  }
+  .back {
+    position: absolute;
+    z-index: 10000;
+    right: 5px;
+    top: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+    text-align: center;
+    transform: translateX(1000px);
+    transition: 1s all;
+    border-radius: 10px;
+    cursor: pointer;
+    /*text-transform: lowercase;*/
+    background-image: linear-gradient(to right, var(--a-prim), var(--a-sec));
+  }
+  /* For the slide animation */
+  .move {
+    transform: translateX(-1000px);
+  }
+  .dic,
+  .country {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: 1.5s all;
+    /* border: 1px solid red; */
+  }
+  
+  .dic-result {
+    color: white;
+    font-weight: 400;
+    word-break: normal;
+    text-align: left;
+    margin-top: 0px;
+    height: 0px;
+    overflow: auto; /* allows for the scroll bars */
+    transition: 1s all;
+  }
+  .dic-result-ext {
+    height: 120px;
+  }
+  
+  #dic-input,
+  #age-input,
+  #country-input {
+    width: var(--a-width);
+    height: var(--a-height);
+    outline: none;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid lightgreen;
+    background-color: black;
+    color: white;
+  }
+  #dic-input:focus,
+  #age-input:focus,
+  #country-input:focus {
+    box-shadow: 0 0 10px lightgreen;
+  }
+  #dic-btn,
+  #age-btn,
+  #country-btn {
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-image: linear-gradient(to right, var(--a-prim), var(--a-sec));
+  }
+  .dic-title,
+  .dic-error {
+    color: var(--a-prim);
+    text-transform: capitalize;
+    font-size: 1.1em;
+  }
+  .dic-error {
+    color: #ffcccc;
+  }
+  
+  .age {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: 1.5s all;
+  }
+  .age form,
+  .grid-age {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #age-input {
+    width: 90%;
+    height: var(--a-height);
+  }
+  #age-btn {
+    position: relative;
+    z-index: 100000;
+    margin-top: 0;
+  }
+  .age img {
+    width: 150px;
+    height: 150px;
+  }
+  .grid-age {
+    position: relative;
+  }
+  .age-counter,
+  .img-cover {
+    position: absolute;
+    color: white;
+    font-weight: 800;
+    font-size: 4em;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background-color: rgba(000, 000, 000, 0.5);
+  }
+  .img-cover {
+    background-color: white;
+    z-index: -10;
+    width: 120px;
+    height: 120px;
+  }
+  
+  /* To hide all the different groups */
+  .hide {
+    opacity: 0;
+    z-index: -10;
+  }
+  .slideBack {
+    transform: translateX(0px);
+  }
+  
+  /* For the toggle (day and light feature) functionality */
+  .toggle-active {
+    background-color: var(--a-prim);
+  }
+  .toggle-active .toggle-circle {
+    transform: translateX(100%);
+    background-color: white;
+  }
+  .body-active {
+    background-color: white;
+  }
+  .body-active #head-word {
+    color: black;
+  }
+  .body-active #dic-input,
+  .body-active #age-input,
+  .body-active #country-input {
+    background-color: white;
+    color: black;
+  }
+  .body-active .dic-result {
+    color: black;
+  }
+  .body-active .dic-error {
+    color: black;
+  }
+  .body-active .country {
+    color: black;
+  }
+  
+  /* For the dic loading animation */
+  
+  .loader-container,
+  .country-loader-container {
+    position: relative;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    margin: 10px 0;
+    /* border: 1px solid white; */
+  }
+  
+  .loading {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid rgb(151, 150, 150);
+    animation: 2s spin linear infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .country-result {
+    width: 400px;
+    text-align: left;
+    height: 0px;
+    overflow: auto;
+    transition: 1s height;
+  }
+  .country-result-ext {
+    height: 150px; /*look into this*/
+  }
+  
+  .country img {
+    /*border-radius: 50%;*/
+    /*width: 30px;*/
+    height: 30px;
+  }
+  .country-loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  .country-loader-container h3 {
+    display: inline;
+    text-transform: capitalize;
+  }
+  .country-headings {
+    font-weight: 900;
+  }
+  
+  .country-error p {
+    display: none;
+  }
+  
+  .country-error-html {
+    display: none;
+  }
+  
+  #global-loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 20000000;
+    display: grid;
+    place-items: center;
+  }
+  .load-cont {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .load-cont span {
+    width: 15px;
+    height: 15px;
+    background-color: var(--a-prim);
+    margin: 7px;
+    border-radius: 50%;
+    display: block;
+    animation: 1.4s global infinite;
+    animation-fill-mode: both;
+  }
+  
+  .load-cont span:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .load-cont span:nth-child(3) {
+    animation-delay: 1s;
+  }
+  
+  @keyframes global {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    20% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+  
+  /* Responsive */
+  
+  @media (max-width: 568px) {
+    :root {
+      --a-width: 220px;
+    }
+    .container {
+      width: 90%;
+    }
+    .board {
+      width: 100%;
+    }
+    .back {
+      font-size: 12px;
+      top: -15px;
+      font-weight: 800;
+    }
+    .country-result {
+      width: 80vw;
+  
+      opacity: 0;
+    }
+    .country-result-ext {
+      height: 120px; /*look into this*/
+      opacity: 1;
+    }
+  
+    .age {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #age-btn {
+      margin-bottom: 20px;
+    }
+    #age-input {
+      width: var(--a-width);
+    }
+    .remove #head-word,
+    .remove .toggle-rect {
+      z-index: -5;
+    }
+    .remove .back {
+      transform: translateX(1000px);
+    }
+    .img-exp {
+      height: 0;
+      display: none;
+    }
+  }
